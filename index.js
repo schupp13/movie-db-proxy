@@ -13,10 +13,12 @@ const limiter = rateLimit({
     windowMs: 10 * 60 * 1000, // 10 minutes
     max: 30
 })
+app.use(cors());
 app.use(limiter);
 // load my routes
-require("./routes")(app)
-app.use(cors());
+app.use(express.json());
+require("./routes")(app);
+
 
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
