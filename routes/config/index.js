@@ -12,16 +12,17 @@ const API_KEY = process.env.API_KEY;
 // init cache
 let cache = apicache.middleware;
 
-router.get('/:media_type/:time_window', cache('1440 minutes'), async(req, res) => {
-  
+// 
+router.get('/', cache('1440 minutes'), async(req, res) => {
     try{
         const params = new URLSearchParams({api_key: API_KEY, ...url.parse(req.url, true).query})
-        const response = await needle('get', `${API_BASE_URL}/trending/${req.params.media_type}/${req.params.time_window}?${params}`)
+        const response = await needle('get', `${API_BASE_URL}/configuration?${params}`)
         res.status(200).json(response.body)
         
     }catch(e){
-       res.status(500).json({e})
+        res.status(500).json({e})
     }
    
 });
+
 module.exports = router

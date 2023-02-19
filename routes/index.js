@@ -1,19 +1,18 @@
 const express = require("express");
-// network
-// network router
+const configurationRouter = require("./config")
 const networkRouter = require("./network/index");
-// trending router
 const trendingRouter = require("./trending/index");
-
-
+const movieRouter = require("./movie/index");
 
 const prefix = 'proxy'
 
 module.exports = function(app) {
+    // Configuration router
+    app.use(`/${prefix}/configuration`,configurationRouter);
+    // Movies, TvShows and Persons
+    app.use(`/${prefix}/movie`, movieRouter);
     // Network Details, Images and Alternative Names
     app.use(`/${prefix}/network`, networkRouter);
     // Trending  Movies, TvShows and Persons
     app.use(`/${prefix}/trending`, trendingRouter);
-
-    console.log("HELLLOE");
   };

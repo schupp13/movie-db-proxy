@@ -20,7 +20,7 @@ router.get('/:id', cache('1440 minutes'), async(req, res) => {
         res.status(200).json(response.body)
         
     }catch(e){
-        console.log(e);
+        res.status(500).json({e})
     }
    
 });
@@ -32,7 +32,7 @@ router.get('/:id/alternative_names', cache('1440 minutes'), async(req, res) => {
         res.status(200).json(response.body)
         
     }catch(e){
-        res.status(500).json(e)
+        res.status(500).json({e})
     }
    
 });
@@ -44,7 +44,7 @@ router.get('/:id/images', cache('1440 minutes'), async(req, res) => {
         res.status(200).json(response.body)
         
     }catch(e){
-        console.log(e);
+        res.status(500).json({e})
     }
    
 });
